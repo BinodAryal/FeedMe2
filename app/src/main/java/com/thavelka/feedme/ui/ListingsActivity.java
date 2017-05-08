@@ -3,6 +3,7 @@ package com.thavelka.feedme.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ public class ListingsActivity extends AppCompatActivity
 
     @BindView(R.id.listings_navigation) BottomNavigationView bottomNavigationView;
     @BindView(R.id.listings_recyclerView) RecyclerView recyclerView;
+    @BindView(R.id.listings_fab) FloatingActionButton addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
