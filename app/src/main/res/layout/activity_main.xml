@@ -6,17 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.thavelka.feedme.ui.MainActivity">
+    tools:context="com.thavelka.feedme.ui.ListingsActivity">
 
-    <FrameLayout
-        android:id="@+id/content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listings_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-    </FrameLayout>
+        android:layout_weight="1"/>
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+        android:id="@+id/listings_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

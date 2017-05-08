@@ -5,8 +5,8 @@ import io.realm.annotations.PrimaryKey;
 
 public class Listing extends RealmObject {
 
-    public static final int TYPE_FOOD = 0;
-    public static final int TYPE_DRINK = 1;
+    public static final String TYPE_FOOD = "food";
+    public static final String TYPE_DRINK = "drink";
 
     @PrimaryKey public String id;
     public Place place;
