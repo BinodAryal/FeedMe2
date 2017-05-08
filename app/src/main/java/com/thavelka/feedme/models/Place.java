@@ -9,7 +9,7 @@ public class Place extends RealmObject {
     public String googlePlacesId;
     public String name;
     public String address;
-    public String imageUrl;
     public Double latitude;
     public Double longitude;
+    public byte[] thumbnail;
 }

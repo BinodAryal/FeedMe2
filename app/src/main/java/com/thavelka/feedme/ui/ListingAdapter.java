@@ -1,15 +1,15 @@
 package com.thavelka.feedme.ui;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.thavelka.feedme.R;
 import com.thavelka.feedme.models.Listing;
 
@@ -77,9 +77,11 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         public void configure(Listing listing) {
             if (listing == null || !listing.isValid()) return;
             if (listing.place != null) {
-                String imageUrl = listing.place.imageUrl;
-                if (TextUtils.isEmpty(imageUrl)) imageUrl = null;
-                Picasso.with(context).load(imageUrl).centerCrop().into(image);
+                byte[] thumbnailBytes = listing.place.thumbnail;
+                if (thumbnailBytes != null) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(thumbnailBytes, 0, thumbnailBytes.length);
+                    image.setImageBitmap(bitmap);
+                }
                 primary.setText(listing.place.name);
                 secondary.setText(listing.place.address);
             }
