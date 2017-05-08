@@ -1,5 +1,6 @@
 package com.thavelka.feedme.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,6 +15,7 @@ import com.thavelka.feedme.models.Listing;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
@@ -67,5 +69,11 @@ public class ListingsActivity extends AppCompatActivity
                 return true;
         }
         return false;
+    }
+
+    @OnClick(R.id.listings_fab) void onClickFab() {
+        Intent i = new Intent(this, EditListingActivity.class);
+        i.putExtra(EditListingActivity.ARG_LISTING_TYPE, Listing.TYPE_FOOD);
+        startActivity(i);
     }
 }
