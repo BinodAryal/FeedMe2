@@ -49,8 +49,8 @@ public class ListingsActivity extends AppCompatActivity
             }
         };
         listings.addChangeListener(changeListener);
-        adapter = new ListingAdapter(this, listings, listing ->
-                Toast.makeText(this, "Tapped listing", Toast.LENGTH_SHORT).show());
+        adapter = new ListingAdapter(this, listings.where().equalTo("type", Listing.TYPE_FOOD).findAll(),
+                listing -> Toast.makeText(this, "Tapped listing", Toast.LENGTH_SHORT).show());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
