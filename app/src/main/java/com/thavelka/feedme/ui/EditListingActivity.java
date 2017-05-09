@@ -15,6 +15,7 @@ import android.widget.ToggleButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlacePhotoMetadata;
 import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
@@ -61,6 +62,7 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
     @BindView(R.id.edit_listing_btn_fri) ToggleButton fridayButton;
     @BindView(R.id.edit_listing_btn_sat) ToggleButton saturdayButton;
     @BindView(R.id.edit_listing_btn_submit) Button submitButton;
+    @BindView(R.id.edit_listing_gradient) ImageView shadow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,10 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autocompleteFragment.setOnPlaceSelectedListener(this);
+        autocompleteFragment.setHint("Search for place");
+        AutocompleteFilter.Builder builder = new AutocompleteFilter.Builder();
+        builder.setTypeFilter(AutocompleteFilter.TYPE_FILTER_ESTABLISHMENT);
+        autocompleteFragment.setFilter(builder.build());
     }
 
     @Override
@@ -91,8 +97,32 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
     }
 
     @OnClick(R.id.edit_listing_btn_submit) void submit() {
-        if (place == null) return;
+        if (place == null) {
+            Toast.makeText(this, "You must select a place first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(description.getText())) {
+            Toast.makeText(this, "A description is required", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String days = "";
+        if (sundayButton.isChecked()) days += "1";
+        if (mondayButton.isChecked()) days += "2";
+        if (tuesdayButton.isChecked()) days += "3";
+        if (wednesdayButton.isChecked()) days += "4";
+        if (thursdayButton.isChecked()) days += "5";
+        if (fridayButton.isChecked()) days += "6";
+        if (saturdayButton.isChecked()) days += "7";
+
+        if (TextUtils.isEmpty(days)) {
+            Toast.makeText(this, "You must select at least one day", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Realm realm = Realm.getDefaultInstance();
+        String finalDays = days;
         realm.executeTransaction(realm1 -> {
             com.thavelka.feedme.models.Place realmPlace = realm1.where(com.thavelka.feedme.models.Place.class)
                     .equalTo("googlePlacesId", place.getId()).findFirst();
@@ -114,20 +144,11 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
                 realmPlace.thumbnail = image.getThumbnailBytes();
             }
 
-            String days = "";
-            if (sundayButton.isChecked()) days += "1";
-            if (mondayButton.isChecked()) days += "2";
-            if (tuesdayButton.isChecked()) days += "3";
-            if (wednesdayButton.isChecked()) days += "4";
-            if (thursdayButton.isChecked()) days += "5";
-            if (fridayButton.isChecked()) days += "6";
-            if (saturdayButton.isChecked()) days += "7";
-
             Listing listing = realm1.createObject(Listing.class, UUID.randomUUID().toString());
             listing.place = realmPlace;
             listing.description = description.getText().toString();
             listing.type = type;
-            listing.days = days;
+            listing.days = finalDays;
         });
         realm.close();
         finish();

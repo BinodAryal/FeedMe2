@@ -1,142 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.thavelka.feedme.ui.EditListingActivity">
-
-    <ImageView
-        android:id="@+id/edit_listing_img_place"
-        android:layout_alignParentTop="true"
-        android:scaleType="centerCrop"
-        app:layout_aspectRatio="178%"
-        app:layout_widthPercent="100%" />
-
-    <ImageView
-        android:id="@+id/edit_listing_gradient"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_alignBottom="@id/edit_listing_img_place"
-        android:src="@drawable/image_shadow" />
-
-    <TextView
-        android:id="@+id/edit_listing_text_place_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/edit_listing_text_place_address"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="Roscoe's Chicken and Waffles"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textIsSelectable="true" />
-
-    <TextView
-        android:id="@+id/edit_listing_text_place_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/edit_listing_img_place"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
-        android:text="42 Wallaby Way Sydney, Australia"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="?android:attr/textColorPrimaryInverse" />
-
-    <LinearLayout
-        android:id="@+id/edit_listing_layout_day_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edit_listing_img_place"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal">
-
-        <ToggleButton
-            android:id="@+id/edit_listing_btn_sun"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="S"
-            android:textOff="S"
-            android:layout_weight="1"/>
-
-        <ToggleButton
-            android:id="@+id/edit_listing_btn_mon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="M"
-            android:textOff="M"
-            android:layout_weight="1"/>
-
-        <ToggleButton
-            android:id="@+id/edit_listing_btn_tue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="T"
-            android:textOff="T"
-            android:layout_weight="1"/>
-
-        <ToggleButton
-            android:id="@+id/edit_listing_btn_wed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="W"
-            android:textOff="W"
-            android:layout_weight="1"/>
-
-        <ToggleButton
-            android:id="@+id/edit_listing_btn_thu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="R"
-            android:textOff="R"
-            android:layout_weight="1"/>
-
-        <ToggleButton
-            android:id="@+id/edit_listing_btn_fri"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="F"
-            android:textOff="F"
-            android:layout_weight="1"/>
-
-        <ToggleButton
-            android:id="@+id/edit_listing_btn_sat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="S"
-            android:textOff="S"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/edit_listing_editText_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edit_listing_layout_day_buttons"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:hint="Description"/>
-
-    <Button
-        android:id="@+id/edit_listing_btn_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="submit"
-        style="?android:attr/borderlessButtonStyle" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_height="wrap_content">
 
         <fragment
             android:id="@+id/autocomplete_fragment"
@@ -146,4 +19,135 @@
 
     </android.support.v7.widget.CardView>
 
-</android.support.percent.PercentRelativeLayout>
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/edit_listing_img_place"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_trees"
+            app:layout_aspectRatio="178%"
+            app:layout_widthPercent="100%" />
+
+        <ImageView
+            android:id="@+id/edit_listing_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_alignBottom="@id/edit_listing_img_place"
+            android:src="@drawable/image_shadow" />
+
+        <TextView
+            android:id="@+id/edit_listing_text_place_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/edit_listing_text_place_address"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:textIsSelectable="true" />
+
+        <TextView
+            android:id="@+id/edit_listing_text_place_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/edit_listing_img_place"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?android:attr/textColorPrimaryInverse" />
+
+        <LinearLayout
+            android:id="@+id/edit_listing_layout_day_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_listing_img_place"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/edit_listing_btn_sun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="S"
+                android:textOff="S"
+                android:layout_weight="1"/>
+
+            <ToggleButton
+                android:id="@+id/edit_listing_btn_mon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="M"
+                android:textOff="M"
+                android:layout_weight="1"/>
+
+            <ToggleButton
+                android:id="@+id/edit_listing_btn_tue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="T"
+                android:textOff="T"
+                android:layout_weight="1"/>
+
+            <ToggleButton
+                android:id="@+id/edit_listing_btn_wed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="W"
+                android:textOff="W"
+                android:layout_weight="1"/>
+
+            <ToggleButton
+                android:id="@+id/edit_listing_btn_thu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="R"
+                android:textOff="R"
+                android:layout_weight="1"/>
+
+            <ToggleButton
+                android:id="@+id/edit_listing_btn_fri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="F"
+                android:textOff="F"
+                android:layout_weight="1"/>
+
+            <ToggleButton
+                android:id="@+id/edit_listing_btn_sat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="S"
+                android:textOff="S"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edit_listing_editText_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_listing_layout_day_buttons"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:hint="Description"/>
+
+        <Button
+            android:id="@+id/edit_listing_btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="submit"
+            style="?android:attr/borderlessButtonStyle" />
+
+    </android.support.percent.PercentRelativeLayout>
+</LinearLayout>
