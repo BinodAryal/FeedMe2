@@ -39,6 +39,18 @@
             android:src="@drawable/image_shadow" />
 
         <TextView
+            android:id="@+id/edit_listing_text_image_credit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/edit_listing_img_place"
+            android:gravity="end"
+            android:visibility="gone"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:textColorLink="?android:attr/textColorSecondaryInverse"
+            android:linksClickable="true"
+            android:textSize="10sp" />
+
+        <TextView
             android:id="@+id/edit_listing_text_place_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

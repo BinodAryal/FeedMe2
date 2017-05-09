@@ -4,7 +4,10 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,6 +54,7 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
     private Image image;
 
     @BindView(R.id.edit_listing_img_place) ImageView placeImage;
+    @BindView(R.id.edit_listing_text_image_credit) TextView imageCredit;
     @BindView(R.id.edit_listing_text_place_name) TextView placeName;
     @BindView(R.id.edit_listing_text_place_address) TextView placeAddress;
     @BindView(R.id.edit_listing_editText_description) EditText description;
@@ -88,6 +92,9 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
         AutocompleteFilter.Builder builder = new AutocompleteFilter.Builder();
         builder.setTypeFilter(AutocompleteFilter.TYPE_FILTER_ESTABLISHMENT);
         autocompleteFragment.setFilter(builder.build());
+
+        // Enable links
+        imageCredit.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
@@ -176,13 +183,14 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
     }
 
     private void getPhoto() {
+        imageCredit.setVisibility(View.GONE);
         if (!mGoogleApiClient.isConnected() || place == null) return;
         Maybe<Image> getPhoto = Maybe.create(emitter -> {
             try {
                 PlacePhotoMetadataResult result = Places.GeoDataApi
                         .getPlacePhotos(mGoogleApiClient, place.getId()).await();
 
-                if (result != null && result.getStatus().isSuccess()) {
+                if (result.getStatus().isSuccess()) {
                     PlacePhotoMetadataBuffer photoMetadataBuffer = result.getPhotoMetadata();
 
                     if (photoMetadataBuffer.getCount() <= 0) {
@@ -215,6 +223,10 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
                 .subscribe(image -> {
                     this.image = image;
                     placeImage.setImageBitmap(image.getImage());
+                    if (image.attribution != null) {
+                        imageCredit.setText(Html.fromHtml("Photo: " + image.attribution));
+                        imageCredit.setVisibility(View.VISIBLE);
+                    }
                 });
 
     }
