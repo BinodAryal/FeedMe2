@@ -6,7 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -48,7 +51,27 @@ public class ListingsActivity extends AppCompatActivity
         listings.addChangeListener(changeListener);
         adapter = new ListingAdapter(this, listings, listing ->
                 Toast.makeText(this, "Tapped listing", Toast.LENGTH_SHORT).show());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+
+        // swipe delete (temporary)
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                final int position = viewHolder.getAdapterPosition();
+                Listing listing = listings.get(position);
+                adapter.notifyItemRemoved(position);
+                realm.executeTransaction(realm1 -> listing.deleteFromRealm());
+            }
+        });
+        helper.attachToRecyclerView(recyclerView);
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -52,6 +53,13 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
     @BindView(R.id.edit_listing_text_place_name) TextView placeName;
     @BindView(R.id.edit_listing_text_place_address) TextView placeAddress;
     @BindView(R.id.edit_listing_editText_description) EditText description;
+    @BindView(R.id.edit_listing_btn_sun) ToggleButton sundayButton;
+    @BindView(R.id.edit_listing_btn_mon) ToggleButton mondayButton;
+    @BindView(R.id.edit_listing_btn_tue) ToggleButton tuesdayButton;
+    @BindView(R.id.edit_listing_btn_wed) ToggleButton wednesdayButton;
+    @BindView(R.id.edit_listing_btn_thu) ToggleButton thursdayButton;
+    @BindView(R.id.edit_listing_btn_fri) ToggleButton fridayButton;
+    @BindView(R.id.edit_listing_btn_sat) ToggleButton saturdayButton;
     @BindView(R.id.edit_listing_btn_submit) Button submitButton;
 
     @Override
@@ -106,11 +114,20 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
                 realmPlace.thumbnail = image.getThumbnailBytes();
             }
 
+            String days = "";
+            if (sundayButton.isChecked()) days += "1";
+            if (mondayButton.isChecked()) days += "2";
+            if (tuesdayButton.isChecked()) days += "3";
+            if (wednesdayButton.isChecked()) days += "4";
+            if (thursdayButton.isChecked()) days += "5";
+            if (fridayButton.isChecked()) days += "6";
+            if (saturdayButton.isChecked()) days += "7";
+
             Listing listing = realm1.createObject(Listing.class, UUID.randomUUID().toString());
             listing.place = realmPlace;
             listing.description = description.getText().toString();
             listing.type = type;
-            listing.days = "1234567";
+            listing.days = days;
         });
         realm.close();
         finish();
