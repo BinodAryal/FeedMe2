@@ -35,6 +35,11 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         this.listener = listener;
     }
 
+    public void setListings(RealmResults<Listing> listings) {
+        this.listings = listings;
+        notifyDataSetChanged();
+    }
+
     public void setOnListingClickListener(OnListingClickListener listener) {
         this.listener = listener;
     }

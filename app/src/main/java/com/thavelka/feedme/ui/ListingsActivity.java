@@ -84,11 +84,14 @@ public class ListingsActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.navigation_home:
+            case R.id.navigation_food:
+                adapter.setListings(listings.where().equalTo("type", Listing.TYPE_FOOD).findAll());
                 return true;
-            case R.id.navigation_dashboard:
+            case R.id.navigation_drinks:
+                adapter.setListings(listings.where().equalTo("type", Listing.TYPE_DRINK).findAll());
                 return true;
-            case R.id.navigation_notifications:
+            case R.id.navigation_entertainment:
+                adapter.setListings(listings.where().equalTo("type", Listing.TYPE_ENTERTAINMENT).findAll());
                 return true;
         }
         return false;
@@ -96,7 +99,17 @@ public class ListingsActivity extends AppCompatActivity
 
     @OnClick(R.id.listings_fab) void onClickFab() {
         Intent i = new Intent(this, EditListingActivity.class);
-        i.putExtra(EditListingActivity.ARG_LISTING_TYPE, Listing.TYPE_FOOD);
+        switch (bottomNavigationView.getSelectedItemId()) {
+            case R.id.navigation_food:
+                i.putExtra(EditListingActivity.ARG_LISTING_TYPE, Listing.TYPE_FOOD);
+                break;
+            case R.id.navigation_drinks:
+                i.putExtra(EditListingActivity.ARG_LISTING_TYPE, Listing.TYPE_DRINK);
+                break;
+            case R.id.navigation_entertainment:
+                i.putExtra(EditListingActivity.ARG_LISTING_TYPE, Listing.TYPE_ENTERTAINMENT);
+                break;
+        }
         startActivity(i);
     }
 }

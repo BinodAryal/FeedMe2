@@ -7,6 +7,7 @@ public class Listing extends RealmObject {
 
     public static final int TYPE_FOOD = 0;
     public static final int TYPE_DRINK = 1;
+    public static final int TYPE_ENTERTAINMENT = 2;
 
     @PrimaryKey public String id;
     public Place place;
