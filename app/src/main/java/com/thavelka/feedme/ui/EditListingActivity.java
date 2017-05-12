@@ -75,6 +75,17 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
         ButterKnife.bind(this);
         type = getIntent().getIntExtra(ARG_LISTING_TYPE, -1);
         if (type < 0) throw new IllegalArgumentException("Type is required argument");
+        switch (type) {
+            case Listing.TYPE_FOOD:
+                setTitle("New Food Deal");
+                break;
+            case Listing.TYPE_DRINK:
+                setTitle("New Drink Deal");
+                break;
+            case Listing.TYPE_ENTERTAINMENT:
+                setTitle("New Entertainment Deal");
+                break;
+        }
 
         // Set up API client
         mGoogleApiClient = new GoogleApiClient
