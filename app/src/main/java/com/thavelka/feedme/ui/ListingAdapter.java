@@ -22,6 +22,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
     private Context context;
     private RealmResults<Listing> listings;
     private OnListingClickListener listener;
+    private View emptyView;
 
     public ListingAdapter(Context context, RealmResults<Listing> listings) {
         this.context = context;
@@ -35,9 +36,25 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         this.listener = listener;
     }
 
+    public void refresh() {
+        if (listings != null && listings.isValid() && listings.isLoaded()) {
+            if (emptyView != null) {
+                emptyView.setVisibility(getItemCount() > 0 ? View.INVISIBLE : View.VISIBLE);
+            }
+            notifyDataSetChanged();
+        }
+    }
+
     public void setListings(RealmResults<Listing> listings) {
         this.listings = listings;
-        notifyDataSetChanged();
+        refresh();
+    }
+
+    public void setEmptyView(View view) {
+        this.emptyView = view;
+        if (emptyView != null) {
+            emptyView.setVisibility(getItemCount() > 0 ? View.INVISIBLE : View.VISIBLE);
+        }
     }
 
     public void setOnListingClickListener(OnListingClickListener listener) {

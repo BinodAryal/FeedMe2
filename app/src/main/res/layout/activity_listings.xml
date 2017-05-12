@@ -27,6 +27,14 @@
         android:layout_height="match_parent"
         android:layout_above="@id/listings_navigation"/>
 
+    <include layout="@layout/listings_empty_view"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/listings_empty_view" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/listings_navigation"
         android:layout_width="match_parent"

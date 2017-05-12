@@ -11,10 +11,14 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.thavelka.feedme.R;
 import com.thavelka.feedme.models.Listing;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,10 +34,12 @@ public class ListingsActivity extends AppCompatActivity
     private RealmResults<Listing> listings;
     private RealmChangeListener<RealmResults<Listing>> changeListener;
     private ListingAdapter adapter;
+    private String day = "1";
 
     @BindView(R.id.listings_navigation) BottomNavigationView bottomNavigationView;
     @BindView(R.id.listings_recyclerView) RecyclerView recyclerView;
     @BindView(R.id.listings_fab) FloatingActionButton addButton;
+    @BindView(R.id.listings_empty_view) View emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +48,19 @@ public class ListingsActivity extends AppCompatActivity
         setContentView(R.layout.activity_listings);
         ButterKnife.bind(this);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        listings = realm.where(Listing.class).findAll();
+        day = String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+        setTitle(Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.US));
+
+        listings = realm.where(Listing.class).contains("days", day).findAll();
         changeListener = element -> {
             if (element != null && element.isValid() && element.isLoaded() && adapter != null) {
-                adapter.notifyDataSetChanged();
+                adapter.refresh();
             }
         };
         listings.addChangeListener(changeListener);
         adapter = new ListingAdapter(this, listings.where().equalTo("type", Listing.TYPE_FOOD).findAll(),
                 listing -> Toast.makeText(this, "Tapped listing", Toast.LENGTH_SHORT).show());
+        adapter.setEmptyView(emptyView);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
