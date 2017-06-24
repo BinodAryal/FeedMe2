@@ -53,7 +53,7 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
     @BindView(R.id.edit_listing_text_image_credit) TextView imageCredit;
     @BindView(R.id.edit_listing_text_place_name) TextView placeName;
     @BindView(R.id.edit_listing_text_place_address) TextView placeAddress;
-    @BindView(R.id.edit_listing_editText_description) EditText description;
+    @BindView(R.id.edit_listing_edittext_description) EditText description;
     @BindView(R.id.edit_listing_btn_sun) ToggleButton sundayButton;
     @BindView(R.id.edit_listing_btn_mon) ToggleButton mondayButton;
     @BindView(R.id.edit_listing_btn_tue) ToggleButton tuesdayButton;

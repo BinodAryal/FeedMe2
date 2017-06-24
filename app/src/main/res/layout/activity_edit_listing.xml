@@ -72,14 +72,25 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="?android:attr/textColorPrimaryInverse" />
 
+        <TextView
+            android:id="@+id/edit_listing_text_days_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_listing_img_place"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="16dp"
+            android:paddingStart="4dp"
+            android:textColor="@color/colorAccent"
+            android:text="Days of week"/>
+
         <LinearLayout
             android:id="@+id/edit_listing_layout_day_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edit_listing_img_place"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_below="@id/edit_listing_text_days_label"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:orientation="horizontal">
 
             <ToggleButton
@@ -140,15 +151,26 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/edit_listing_editText_description"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/edit_listing_text_description_label"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/edit_listing_layout_day_buttons"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="16dp"
+            android:paddingStart="4dp"
+            android:textColor="@color/colorAccent"
+            android:text="Description"/>
+
+        <EditText
+            android:id="@+id/edit_listing_edittext_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_listing_text_description_label"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:hint="Description - Items, hours, details"
+            android:hint="e.g. $3 margaritas from 3-7"
             android:inputType="textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine"
             android:maxLength="300"
             android:maxLines="5" />
@@ -159,8 +181,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:text="submit"
             style="?android:attr/borderlessButtonStyle" />
 
