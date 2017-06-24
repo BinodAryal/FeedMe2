@@ -3,8 +3,8 @@
     package="com.thavelka.feedme">
 
     <application
-        android:allowBackup="false"
         android:name=".FeedMe"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -20,7 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.EditListingActivity"
+        <activity
+            android:name=".ui.EditListingActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.AuthActivity"
             android:screenOrientation="portrait"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA_03KyqXHBvwlXHHKYAU3uMkI0f9bxWhs" />
     </application>
 </manifest>
