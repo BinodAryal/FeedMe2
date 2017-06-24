@@ -1,6 +1,5 @@
 package com.thavelka.feedme.ui;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -20,23 +19,20 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlacePhotoMetadata;
-import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
-import com.google.android.gms.location.places.PlacePhotoMetadataResult;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.thavelka.feedme.R;
 import com.thavelka.feedme.models.Listing;
-import com.thavelka.feedme.utils.ImageUtils;
+import com.thavelka.feedme.utils.gms.Image;
+import com.thavelka.feedme.utils.gms.PlacesUtils;
 
 import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Maybe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -48,7 +44,7 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
     public static final String ARG_LISTING_TYPE = "listingType";
 
     private int type;
-    private GoogleApiClient mGoogleApiClient;
+    private GoogleApiClient googleApiClient;
     private Place place;
     private Disposable photoDisposable;
     private Image image;
@@ -88,7 +84,7 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
         }
 
         // Set up API client
-        mGoogleApiClient = new GoogleApiClient
+        googleApiClient = new GoogleApiClient
                 .Builder(this)
                 .addApi(Places.GEO_DATA_API)
                 .addApi(Places.PLACE_DETECTION_API)
@@ -175,7 +171,6 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
     @Override
     public void onPlaceSelected(Place place) {
         this.place = place;
-
         placeName.setText(!TextUtils.isEmpty(place.getName()) ? place.getName() : "No Name");
         placeAddress.setText(!TextUtils.isEmpty(place.getAddress()) ? place.getAddress() : "No Address");
         getPhoto();
@@ -195,78 +190,19 @@ public class EditListingActivity extends AppCompatActivity implements PlaceSelec
 
     private void getPhoto() {
         imageCredit.setVisibility(View.GONE);
-        if (!mGoogleApiClient.isConnected() || place == null) return;
-        Maybe<Image> getPhoto = Maybe.create(emitter -> {
-            try {
-                PlacePhotoMetadataResult result = Places.GeoDataApi
-                        .getPlacePhotos(mGoogleApiClient, place.getId()).await();
-
-                if (result.getStatus().isSuccess()) {
-                    PlacePhotoMetadataBuffer photoMetadataBuffer = result.getPhotoMetadata();
-
-                    if (photoMetadataBuffer.getCount() <= 0) {
-                        photoMetadataBuffer.release();
-                        emitter.onComplete();
-                        return;
-                    }
-
-                    PlacePhotoMetadata photo = photoMetadataBuffer.get(0);
-                    Bitmap fullImage = photo.getScaledPhoto(mGoogleApiClient, placeImage.getWidth(),
-                            1600).await().getBitmap();
-                    Bitmap thumbnail = ImageUtils.getCroppedBitmap
-                            (photo.getScaledPhoto(mGoogleApiClient, 200, 200).await().getBitmap());
-                    CharSequence attribution = photo.getAttributions() != null
-                            ? photo.getAttributions() : "";
-                    photoMetadataBuffer.release();
-                    Image image = new Image(fullImage, thumbnail, attribution.toString());
-                    emitter.onSuccess(image);
-                } else {
-                    emitter.onComplete();
-                }
-            } catch (Throwable t) {
-                emitter.onError(t);
-            }
-        });
-
-        photoDisposable = getPhoto
+        if (!googleApiClient.isConnected() || place == null) return;
+        photoDisposable = PlacesUtils.getPhoto(googleApiClient, place.getId(),
+                placeImage.getWidth(), 1600)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(image -> {
                     this.image = image;
                     placeImage.setImageBitmap(image.getImage());
-                    if (image.attribution != null) {
-                        imageCredit.setText(Html.fromHtml("Photo: " + image.attribution));
+                    if (image.getAttribution() != null) {
+                        imageCredit.setText(Html.fromHtml("Photo: " + image.getAttribution()));
                         imageCredit.setVisibility(View.VISIBLE);
                     }
                 });
 
-    }
-
-    public static class Image {
-        private Bitmap image;
-        private Bitmap thumbnail;
-        private String attribution;
-
-        public Image(Bitmap image, Bitmap thumbnail, String attribution) {
-            this.image = image;
-            this.thumbnail = thumbnail;
-            this.attribution = attribution;
-        }
-
-        public Bitmap getImage() {
-            return image;
-        }
-
-        public Bitmap getThumbnail() {
-            return thumbnail;
-        }
-
-        public byte[] getThumbnailBytes() {
-            return ImageUtils.getImageBytes(thumbnail, Bitmap.CompressFormat.PNG, 50);
-        }
-
-        public String getAttribution() {
-            return attribution;
-        }
     }
 }
