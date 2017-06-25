@@ -1,9 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_sign_in"
+    android:orientation="vertical"
     tools:context="com.thavelka.feedme.ui.AuthActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_sign_in"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        app:layout_widthPercent="100%"
+        app:layout_heightPercent="50%"
+        android:id="@+id/auth_layout_text"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="FeedMe"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="78sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="This is a description of my app"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:id="@+id/textView2"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/auth_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/auth_layout_text">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.thavelka.feedme.ui.EmailAuthFragment"
+            tools:layout="@layout/fragment_email_auth" />
+        </FrameLayout>
+
+
+</android.support.percent.PercentRelativeLayout>

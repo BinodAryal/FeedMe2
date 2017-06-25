@@ -57,6 +57,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // Google APIs
     compile 'com.google.android.gms:play-services-location:10.2.4'
@@ -75,6 +76,7 @@ dependencies {
 
     // Misc
     compile 'com.jakewharton.timber:timber:4.5.1'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     testCompile 'junit:junit:4.12'
 }
