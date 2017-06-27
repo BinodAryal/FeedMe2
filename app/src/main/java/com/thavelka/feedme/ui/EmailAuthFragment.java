@@ -102,14 +102,18 @@ public class EmailAuthFragment extends Fragment {
     }
 
     @OnClick(R.id.email_auth_btn_submit) void onClickSubmit() {
+        String email = emailField.getText().toString();
+        String password = passwordField.getText().toString();
+        boolean confirm = TextUtils.equals(password, confirmPasswordField.getText());
+
+        if (!validateEmail(email)) return;
+        if (password.length() < 8) return;
         if (!newUser) {
             // Sign in
-            return;
-        } else if (validateEmail(emailField.getText().toString())
-                && passwordField.getText().length() >= 8
-                && TextUtils.equals(passwordField.getText(), confirmPasswordField.getText())) {
+            listener.signInWithEmail(email, password);
+        } else if (confirm) {
             // Sign up
-            return;
+            listener.registerWithEmail(email, password);
         }
     }
 
