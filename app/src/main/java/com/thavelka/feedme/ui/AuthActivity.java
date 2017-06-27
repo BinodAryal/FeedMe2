@@ -9,7 +9,7 @@ import com.thavelka.feedme.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AuthActivity extends AppCompatActivity {
+public class AuthActivity extends AppCompatActivity implements AuthFragment.AuthListener {
 
     AuthFragment authFragment;
     EmailAuthFragment emailAuthFragment;
@@ -26,5 +26,22 @@ public class AuthActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.auth_container, authFragment)
                 .commit();
+    }
+
+    @Override
+    public void googleSignIn() {
+
+    }
+
+    @Override
+    public void facebookSignIn() {
+
+    }
+
+    @Override
+    public void emailAuth(boolean newUser) {
+        EmailAuthFragment fragment = EmailAuthFragment.newInstance(newUser);
+        getSupportFragmentManager().beginTransaction().replace(R.id.auth_container, fragment)
+                .addToBackStack("emailAuth").commit();
     }
 }

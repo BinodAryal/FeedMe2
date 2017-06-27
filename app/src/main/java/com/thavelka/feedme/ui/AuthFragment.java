@@ -1,6 +1,7 @@
 package com.thavelka.feedme.ui;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,11 +15,13 @@ import com.thavelka.feedme.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class AuthFragment extends Fragment {
 
     Unbinder unbinder;
+    AuthListener listener;
 
     @BindView(R.id.auth_btn_google) SignInButton googleButton;
     @BindView(R.id.auth_btn_facebook) LoginButton facebookButton;
@@ -39,5 +42,32 @@ public class AuthFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = ((AuthListener) context);
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement AuthListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    @OnClick({R.id.auth_btn_email, R.id.auth_btn_register}) void onClickEmailAuth(Button b) {
+        listener.emailAuth(b.getId() == R.id.auth_btn_register);
+    }
+
+    interface AuthListener {
+        void googleSignIn();
+        void facebookSignIn();
+        void emailAuth(boolean newUser);
     }
 }
