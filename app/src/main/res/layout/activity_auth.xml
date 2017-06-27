@@ -19,7 +19,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#88000000"/>
+        android:background="@color/auth_scrim"/>
 
     <ProgressBar
         android:id="@+id/auth_progress"
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
-            android:text="FeedMe"
+            android:text="@string/app_name"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="78sp" />
 
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Some catchy app slogan goes here"
+            android:text="@string/auth_slogan"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
     </LinearLayout>

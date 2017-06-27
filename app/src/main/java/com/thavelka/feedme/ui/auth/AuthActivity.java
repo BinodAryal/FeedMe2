@@ -101,21 +101,21 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
         String msg;
         switch (error.getErrorCode()) {
             case IO_EXCEPTION:
-                msg = "Network is unavailable";
+                msg = getString(R.string.auth_error_network);
                 break;
             case UNKNOWN_ACCOUNT:
-                msg = "Account does not exist";
+                msg = getString(R.string.auth_error_unknown_account);
                 break;
             case INVALID_CREDENTIALS:
-                msg = "The provided credentials are invalid";
+                msg = getString(R.string.auth_error_credentials);
                 break;
             default:
                 Throwable t = error.getException();
                 if (t != null && t instanceof ConnectException) {
-                    msg = "Network is unavailable";
+                    msg = getString(R.string.auth_error_network);
                     break;
                 }
-                msg = "An error occurred during sign in";
+                msg = getString(R.string.auth_error_default);
         }
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
@@ -143,7 +143,8 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
             @Override
             public void onError(String s) {
                 Timber.e(s);
-                Toast.makeText(AuthActivity.this, "Unable to sign in", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AuthActivity.this, R.string.auth_error_google,
+                        Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -160,7 +161,8 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
             @Override
             public void onAuthError(FacebookException error) {
                 Timber.e(error);
-                Toast.makeText(AuthActivity.this, "Unable to sign in", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AuthActivity.this, R.string.auth_error_facebook,
+                        Toast.LENGTH_SHORT).show();
             }
         };
     }

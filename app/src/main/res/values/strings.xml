@@ -9,4 +9,41 @@
     <string name="navigation_drinks">Drinks</string>
     <string name="navigation_entertainment">Entertainment</string>
     <string name="action_logout">Sign out</string>
+
+    <!--Auth strings-->
+    <string name="auth_slogan">Some catchy app slogan goes here</string>
+    <string name="auth_sign_in_email_label">sign in with email</string>
+    <string name="auth_register_email_label">Need an account?</string>
+    <string name="auth_email_hint">Email</string>
+    <string name="auth_password_hint">Password</string>
+    <string name="auth_confirm_password_hint">Confirm password</string>
+    <string name="auth_sign_in_label">Sign in</string>
+    <string name="auth_error_network">Network is unavailable</string>
+    <string name="auth_error_unknown_account">Account does not exist</string>
+    <string name="auth_error_credentials">The provided credentials are invalid</string>
+    <string name="auth_error_default">An error occurred during sign in</string>
+    <string name="auth_error_google">Unable to sign in</string>
+    <string name="auth_error_facebook">Unable to sign in</string>
+
+    <!--Listings strings-->
+    <string name="listing_cell_primary_placeholder">Roscoe\'s Chicken and Waffles</string>
+    <string name="listing_cell_secondary_placeholder">42 Wallaby Way Sydney, Australia</string>
+    <string name="listing_cell_tertiary_placeholder">Half off appetizers until 8:00 PM</string>
+    <string name="listings_empty_primary">No deals today 💸</string>
+    <string name="listings_empty_secondary">Check back tomorrow, or press the \'+\' button to add a new deal</string>
+    <string name="edit_listing_days_of_week">Days of week</string>
+
+    <!--Edit listing strings-->
+    <string name="edit_listing_sun_abbr">S</string>
+    <string name="edit_listing_mon_abbr">M</string>
+    <string name="edit_listing_tues_abbr">T</string>
+    <string name="edit_listing_wed_abbr">W</string>
+    <string name="edit_listing_thu_abbr">R</string>
+    <string name="edit_listing_fri_abbr">F</string>
+    <string name="edit_listing_sat_abbr">S</string>
+    <string name="edit_listing_description_label">Description</string>
+    <string name="edit_listing_description_hint">e.g. $3 margaritas from 3–7</string>
+    <string name="edit_listing_submit_label">submit</string>
+
+
 </resources>

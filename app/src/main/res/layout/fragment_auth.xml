@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="sign in with email" />
+            android:text="@string/auth_sign_in_email_label" />
 
         <Button
             android:id="@+id/auth_btn_register"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:text="Need an account?" />
+            android:text="@string/auth_register_email_label" />
 
     </LinearLayout>
 

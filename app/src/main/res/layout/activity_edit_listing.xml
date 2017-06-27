@@ -29,14 +29,16 @@
             android:scaleType="centerCrop"
             android:src="@drawable/bg_trees"
             app:layout_aspectRatio="178%"
-            app:layout_widthPercent="100%" />
+            app:layout_widthPercent="100%"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/edit_listing_gradient"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:layout_alignBottom="@id/edit_listing_img_place"
-            android:src="@drawable/image_shadow" />
+            android:src="@drawable/image_shadow"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/edit_listing_text_image_credit"
@@ -48,7 +50,8 @@
             android:textColor="?android:attr/textColorSecondaryInverse"
             android:textColorLink="?android:attr/textColorSecondaryInverse"
             android:linksClickable="true"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
 
         <TextView
             android:id="@+id/edit_listing_text_place_name"
@@ -82,7 +85,8 @@
             android:layout_marginTop="16dp"
             android:paddingStart="4dp"
             android:textColor="@color/colorAccent"
-            android:text="Days of week"/>
+            android:text="@string/edit_listing_days_of_week"
+            tools:ignore="RtlSymmetry" />
 
         <LinearLayout
             android:id="@+id/edit_listing_layout_day_buttons"
@@ -97,56 +101,56 @@
                 android:id="@+id/edit_listing_btn_sun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="S"
-                android:textOff="S"
+                android:textOn="@string/edit_listing_sun_abbr"
+                android:textOff="@string/edit_listing_sun_abbr"
                 android:layout_weight="1"/>
 
             <ToggleButton
                 android:id="@+id/edit_listing_btn_mon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="M"
-                android:textOff="M"
+                android:textOn="@string/edit_listing_mon_abbr"
+                android:textOff="@string/edit_listing_mon_abbr"
                 android:layout_weight="1"/>
 
             <ToggleButton
                 android:id="@+id/edit_listing_btn_tue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="T"
-                android:textOff="T"
+                android:textOn="@string/edit_listing_tues_abbr"
+                android:textOff="@string/edit_listing_tues_abbr"
                 android:layout_weight="1"/>
 
             <ToggleButton
                 android:id="@+id/edit_listing_btn_wed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="W"
-                android:textOff="W"
+                android:textOn="@string/edit_listing_wed_abbr"
+                android:textOff="@string/edit_listing_wed_abbr"
                 android:layout_weight="1"/>
 
             <ToggleButton
                 android:id="@+id/edit_listing_btn_thu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="R"
-                android:textOff="R"
+                android:textOn="@string/edit_listing_thu_abbr"
+                android:textOff="@string/edit_listing_thu_abbr"
                 android:layout_weight="1"/>
 
             <ToggleButton
                 android:id="@+id/edit_listing_btn_fri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="F"
-                android:textOff="F"
+                android:textOn="@string/edit_listing_fri_abbr"
+                android:textOff="@string/edit_listing_fri_abbr"
                 android:layout_weight="1"/>
 
             <ToggleButton
                 android:id="@+id/edit_listing_btn_sat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="S"
-                android:textOff="S"
+                android:textOn="@string/edit_listing_sat_abbr"
+                android:textOff="@string/edit_listing_sat_abbr"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -161,7 +165,8 @@
             android:layout_marginTop="16dp"
             android:paddingStart="4dp"
             android:textColor="@color/colorAccent"
-            android:text="Description"/>
+            android:text="@string/edit_listing_description_label"
+            tools:ignore="RtlSymmetry" />
 
         <EditText
             android:id="@+id/edit_listing_edittext_description"
@@ -170,7 +175,7 @@
             android:layout_below="@id/edit_listing_text_description_label"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:hint="e.g. $3 margaritas from 3-7"
+            android:hint="@string/edit_listing_description_hint"
             android:inputType="textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine"
             android:maxLength="300"
             android:maxLines="5" />
@@ -183,7 +188,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="submit"
+            android:text="@string/edit_listing_submit_label"
             style="?android:attr/borderlessButtonStyle" />
 
     </android.support.percent.PercentRelativeLayout>
