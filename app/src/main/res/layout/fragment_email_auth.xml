@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_vertical"
     android:padding="@dimen/activity_horizontal_margin"
     tools:context="com.thavelka.feedme.ui.AuthActivity">
 
@@ -11,37 +12,49 @@
         android:id="@+id/email_auth_textinput_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"/>
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/email_auth_textinput_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true">
+
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"/>
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/email_auth_textinput_confirm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true">
+
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Confirm password"/>
+            android:hint="Confirm password"
+            android:inputType="textPassword"
+            android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/email_auth_btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="Sign in"/>
 
 </LinearLayout>

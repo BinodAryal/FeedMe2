@@ -68,8 +68,6 @@ public class EmailAuthFragment extends Fragment {
         submit.setText(newUser ? "Sign up" : "Sign in");
         if (newUser) {
             emailWrapper.setErrorEnabled(true);
-            passwordWrapper.setErrorEnabled(true);
-            confirmPasswordWrapper.setErrorEnabled(true);
             emailField.addTextChangedListener(textWatcher(emailField));
             passwordField.addTextChangedListener(textWatcher(passwordField));
             confirmPasswordField.addTextChangedListener(textWatcher(confirmPasswordField));

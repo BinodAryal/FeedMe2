@@ -40,8 +40,8 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
 
     @Override
     public void emailAuth(boolean newUser) {
-        EmailAuthFragment fragment = EmailAuthFragment.newInstance(newUser);
-        getSupportFragmentManager().beginTransaction().replace(R.id.auth_container, fragment)
+        emailAuthFragment = EmailAuthFragment.newInstance(newUser);
+        getSupportFragmentManager().beginTransaction().replace(R.id.auth_container, emailAuthFragment)
                 .addToBackStack("emailAuth").commit();
     }
 }
