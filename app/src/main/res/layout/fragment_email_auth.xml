@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center_vertical"
     android:padding="@dimen/activity_horizontal_margin"
-    tools:context="com.thavelka.feedme.ui.AuthActivity">
+    tools:context="com.thavelka.feedme.ui.auth.AuthActivity">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/email_auth_textinput_email"

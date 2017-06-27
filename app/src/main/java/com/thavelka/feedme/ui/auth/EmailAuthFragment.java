@@ -1,4 +1,4 @@
-package com.thavelka.feedme.ui;
+package com.thavelka.feedme.ui.auth;
 
 
 import android.content.Context;

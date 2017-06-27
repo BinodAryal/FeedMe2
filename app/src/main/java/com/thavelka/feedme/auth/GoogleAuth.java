@@ -20,15 +20,12 @@ package com.thavelka.feedme.auth;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.thavelka.feedme.utils.Constants;
 
@@ -38,6 +35,7 @@ import com.thavelka.feedme.utils.Constants;
  */
 public abstract class GoogleAuth implements GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
+    private FragmentActivity activity;
     private static final int RC_SIGN_IN = 10;
 
     /**
@@ -45,12 +43,9 @@ public abstract class GoogleAuth implements GoogleApiClient.OnConnectionFailedLi
      * Activity's onActivityResult will always be notified, but a Fragment's onActivityResult
      * can be notified as well if the Fragment is provided as an argument.
      *
-     * @param btnSignIn The Google sign-in button.
      * @param fragmentActivity The Activity that will manage the api client.
-     * @param fragment The fragment to be notified (optional).
      */
-    public GoogleAuth(final SignInButton btnSignIn, final FragmentActivity fragmentActivity,
-                      @Nullable final Fragment fragment) {
+    public GoogleAuth(final FragmentActivity fragmentActivity) {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .requestIdToken(Constants.GOOGLE_CLIENT_ID)
@@ -61,14 +56,12 @@ public abstract class GoogleAuth implements GoogleApiClient.OnConnectionFailedLi
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        btnSignIn.setOnClickListener(v -> {
-            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-            if (fragment != null) {
-                fragment.startActivityForResult(signInIntent, RC_SIGN_IN);
-            } else {
-                fragmentActivity.startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
+        this.activity = fragmentActivity;
+    }
+
+    public void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        activity.startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     /**

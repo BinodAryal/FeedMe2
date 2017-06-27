@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.thavelka.feedme.R;
 import com.thavelka.feedme.models.Listing;
+import com.thavelka.feedme.ui.auth.AuthActivity;
 import com.thavelka.feedme.utils.UserManager;
 
 import java.util.Calendar;

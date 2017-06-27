@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_sign_in"
     android:orientation="vertical"
-    tools:context="com.thavelka.feedme.ui.AuthActivity">
+    tools:context="com.thavelka.feedme.ui.auth.AuthActivity">
 
     <ImageView
         android:layout_width="match_parent"

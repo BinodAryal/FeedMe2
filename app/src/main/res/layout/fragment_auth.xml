@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thavelka.feedme.ui.AuthActivity">
+    tools:context="com.thavelka.feedme.ui.auth.AuthActivity">
 
     <LinearLayout
         app:layout_widthPercent="60%"

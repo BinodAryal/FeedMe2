@@ -24,24 +24,20 @@ import android.content.Intent;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 
 /**
  * Provide authentication using users Facebook account.
  * https://developers.facebook.com/docs/facebook-login/android
  */
 public abstract class FacebookAuth {
-    private final LoginButton loginButton;
     private final CallbackManager callbackManager;
 
-    public FacebookAuth(final LoginButton loginBtn) {
+    public FacebookAuth() {
         callbackManager = CallbackManager.Factory.create();
-        this.loginButton = loginBtn;
-        loginButton.setReadPermissions("email");
-
         // Callback registration
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -58,7 +54,6 @@ public abstract class FacebookAuth {
                 onAuthError(exception);
             }
         });
-
     }
 
     /**
