@@ -17,8 +17,10 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
 import com.thavelka.feedme.R;
+import com.thavelka.feedme.auth.GoogleAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,9 +30,10 @@ import timber.log.Timber;
 
 public class AuthFragment extends Fragment {
 
-    Unbinder unbinder;
-    AuthListener listener;
-    CallbackManager callbackManager;
+    private Unbinder unbinder;
+    private AuthListener listener;
+    private GoogleAuth googleAuth;
+    private CallbackManager callbackManager;
 
     @BindView(R.id.auth_btn_google) SignInButton googleButton;
     @BindView(R.id.auth_btn_facebook) LoginButton facebookButton;
@@ -42,8 +45,6 @@ public class AuthFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Set up google auth
 
         // Set up facebook auth
         callbackManager = CallbackManager.Factory.create();
@@ -69,7 +70,21 @@ public class AuthFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_auth, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        // Configure facebook
+        // Set up google auth
+        googleAuth = new GoogleAuth(googleButton, getActivity(), this) {
+            @Override
+            public void onRegistrationComplete(GoogleSignInResult result) {
+                listener.googleSignIn(result);
+            }
+
+            @Override
+            public void onError(String s) {
+                super.onError(s);
+                Timber.e(s);
+            }
+        };
+
+        // Configure facebook auth
         facebookButton.setReadPermissions("email");
         facebookButton.setFragment(this);
         return view;
@@ -102,6 +117,7 @@ public class AuthFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+        googleAuth.onActivityResult(requestCode, resultCode, data);
     }
 
     @OnClick({R.id.auth_btn_email, R.id.auth_btn_register}) void onClickEmailAuth(Button b) {
@@ -109,7 +125,7 @@ public class AuthFragment extends Fragment {
     }
 
     interface AuthListener {
-        void googleSignIn();
+        void googleSignIn(GoogleSignInResult result);
         void facebookSignIn(LoginResult result);
         void onClickEmailAuth(boolean newUser);
     }
