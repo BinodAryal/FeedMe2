@@ -1,6 +1,7 @@
 package com.thavelka.feedme.ui;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -27,8 +28,10 @@ public class EmailAuthFragment extends Fragment {
 
     public static final String ARG_NEW_USER = "newUser";
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
+
     private Pattern pattern;
     private Unbinder unbinder;
+    private EmailAuthListener listener;
     private boolean newUser;
 
     EditText emailField;
@@ -81,6 +84,23 @@ public class EmailAuthFragment extends Fragment {
         unbinder.unbind();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = ((EmailAuthListener) context);
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement EmailAuthListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
     @OnClick(R.id.email_auth_btn_submit) void onClickSubmit() {
         if (!newUser) {
             // Sign in
@@ -120,5 +140,10 @@ public class EmailAuthFragment extends Fragment {
     public boolean validateEmail(String email) {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    interface EmailAuthListener {
+        void signInWithEmail(String email, String password);
+        void registerWithEmail(String email, String password);
     }
 }
