@@ -52,8 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="This is a description of my app"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+            android:text="We eatin, fam!!!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
     </LinearLayout>
 
