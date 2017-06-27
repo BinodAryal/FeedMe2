@@ -10,12 +10,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.thavelka.feedme.R;
 import com.thavelka.feedme.models.Listing;
+import com.thavelka.feedme.utils.UserManager;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -89,6 +92,26 @@ public class ListingsActivity extends AppCompatActivity
         if (changeListener != null) listings.removeChangeListener(changeListener);
         super.onDestroy();
         if (realm != null) realm.close();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.listings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                UserManager.logoutActiveUser();
+                Intent i = new Intent(this, AuthActivity.class);
+                startActivity(i);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

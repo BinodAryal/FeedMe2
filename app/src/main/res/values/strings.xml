@@ -4,7 +4,9 @@
     <string name="facebook_app_id">175444619660019</string>
     <string name="fb_login_protocol_scheme">fb175444619660019</string>
 
+    <!--Menu items-->
     <string name="navigation_food">Food</string>
     <string name="navigation_drinks">Drinks</string>
     <string name="navigation_entertainment">Entertainment</string>
+    <string name="action_logout">Sign out</string>
 </resources>

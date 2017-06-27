@@ -13,7 +13,6 @@ import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.thavelka.feedme.R;
-import com.thavelka.feedme.auth.GoogleAuth;
 import com.thavelka.feedme.utils.Constants;
 import com.thavelka.feedme.utils.UserManager;
 
@@ -26,8 +25,6 @@ import timber.log.Timber;
 
 public class AuthActivity extends AppCompatActivity implements AuthFragment.AuthListener,
         EmailAuthFragment.EmailAuthListener {
-
-    private GoogleAuth googleAuth;
 
     @BindView(R.id.auth_container) FrameLayout container;
     @BindView(R.id.auth_progress) ProgressBar progressBar;
